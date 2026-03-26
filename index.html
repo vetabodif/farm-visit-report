@@ -10,9 +10,6 @@
         --brand-dark: #4d1bb3;
         --border: #d9d9e3;
         --bg-soft: #f7f7fb;
-        --ok: #198754;
-        --notok: #dc3545;
-        --na: #6c757d;
         --text: #222;
       }
 
@@ -28,7 +25,7 @@
       }
 
       .container {
-        max-width: 1100px;
+        max-width: 1200px;
         margin: 24px auto;
         padding: 0 16px;
       }
@@ -68,6 +65,7 @@
         border: 1px solid var(--border);
         border-radius: 14px;
         overflow: hidden;
+        background: #fff;
       }
 
       .section-title {
@@ -82,6 +80,7 @@
         padding: 12px 16px 0;
         font-size: 14px;
         color: #555;
+        line-height: 1.5;
       }
 
       .section-body {
@@ -101,8 +100,7 @@
       }
 
       .field input,
-      .field textarea,
-      .field select {
+      .field textarea {
         width: 100%;
         border: 1px solid #ccd2dd;
         border-radius: 10px;
@@ -136,22 +134,18 @@
         font-weight: bold;
       }
 
-      table.audit-table th.status,
-      table.audit-table td.status {
-        width: 90px;
+      table.audit-table td.status,
+      table.audit-table th.status {
         text-align: center;
+        width: 110px;
       }
 
-      .radio-group {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .radio-group input {
-        transform: scale(1.1);
-        cursor: pointer;
+      table.audit-table input[type="text"] {
+        width: 100%;
+        border: 1px solid #ccd2dd;
+        border-radius: 8px;
+        padding: 8px 10px;
+        font-size: 13px;
       }
 
       .grading {
@@ -169,23 +163,6 @@
         gap: 8px;
         font-weight: bold;
         background: white;
-      }
-
-      .dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        display: inline-block;
-      }
-
-      .green {
-        background: var(--ok);
-      }
-      .orange {
-        background: #f0ad4e;
-      }
-      .red {
-        background: var(--notok);
       }
 
       .signature-grid {
@@ -277,7 +254,6 @@
 
         <div class="body">
           <form>
-            <!-- General Information -->
             <div class="section">
               <div class="section-title">General Information</div>
               <div class="section-body">
@@ -306,7 +282,6 @@
               </div>
             </div>
 
-            <!-- Service Room & Biosecurity Entry -->
             <div class="section">
               <div class="section-title">Service Room & Biosecurity Entry</div>
               <div class="section-desc">
@@ -319,9 +294,10 @@
                   <thead>
                     <tr>
                       <th>Inspection Item</th>
-                      <th class="status">OK</th>
-                      <th class="status">Not OK</th>
-                      <th class="status">NA</th>
+                      <th class="status">Excellent</th>
+                      <th class="status">Good</th>
+                      <th class="status">Poor</th>
+                      <th>Note</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -331,70 +307,114 @@
                         <input
                           type="radio"
                           name="cleaned_sanitized"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="cleaned_sanitized"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="cleaned_sanitized"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="cleaned_sanitized_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
                     <tr>
-                      <td>Hand Sanitizer (Available &amp; Functional)</td>
+                      <td>Hand Sanitizer (Available & Functional)</td>
                       <td class="status">
-                        <input type="radio" name="hand_sanitizer" value="ok" />
+                        <input
+                          type="radio"
+                          name="hand_sanitizer"
+                          value="excellent"
+                        />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="hand_sanitizer"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
-                        <input type="radio" name="hand_sanitizer" value="na" />
+                        <input
+                          type="radio"
+                          name="hand_sanitizer"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="hand_sanitizer_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                     <tr>
                       <td>Rat Glue / Pest Control Measures in Place</td>
                       <td class="status">
-                        <input type="radio" name="pest_control" value="ok" />
-                      </td>
-                      <td class="status">
                         <input
                           type="radio"
                           name="pest_control"
-                          value="not_ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
-                        <input type="radio" name="pest_control" value="na" />
+                        <input type="radio" name="pest_control" value="good" />
+                      </td>
+                      <td class="status">
+                        <input type="radio" name="pest_control" value="poor" />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="pest_control_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                     <tr>
-                      <td>Checklist Paper / Logs (Updated &amp; Present)</td>
+                      <td>Checklist Paper / Logs (Updated & Present)</td>
                       <td class="status">
-                        <input type="radio" name="checklist_logs" value="ok" />
+                        <input
+                          type="radio"
+                          name="checklist_logs"
+                          value="excellent"
+                        />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="checklist_logs"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
-                        <input type="radio" name="checklist_logs" value="na" />
+                        <input
+                          type="radio"
+                          name="checklist_logs"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="checklist_logs_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                   </tbody>
@@ -402,7 +422,6 @@
               </div>
             </div>
 
-            <!-- Feed Management -->
             <div class="section">
               <div class="section-title">
                 Feed Management & Nutrition Access
@@ -412,9 +431,10 @@
                   <thead>
                     <tr>
                       <th>Inspection Item</th>
-                      <th class="status">OK</th>
-                      <th class="status">Not OK</th>
-                      <th class="status">NA</th>
+                      <th class="status">Excellent</th>
+                      <th class="status">Good</th>
+                      <th class="status">Poor</th>
+                      <th>Note</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -424,21 +444,28 @@
                         <input
                           type="radio"
                           name="feed_line_height"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="feed_line_height"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="feed_line_height"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="feed_line_height_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
@@ -448,21 +475,28 @@
                         <input
                           type="radio"
                           name="feed_amount_feeders"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="feed_amount_feeders"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="feed_amount_feeders"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="feed_amount_feeders_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
@@ -472,21 +506,28 @@
                         <input
                           type="radio"
                           name="feed_amount_redplates"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="feed_amount_redplates"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="feed_amount_redplates"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="feed_amount_redplates_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
@@ -495,7 +536,6 @@
               </div>
             </div>
 
-            <!-- Water Management -->
             <div class="section">
               <div class="section-title">Water Management & Sanitation</div>
               <div class="section-body">
@@ -503,9 +543,10 @@
                   <thead>
                     <tr>
                       <th>Inspection Item</th>
-                      <th class="status">OK</th>
-                      <th class="status">Not OK</th>
-                      <th class="status">NA</th>
+                      <th class="status">Excellent</th>
+                      <th class="status">Good</th>
+                      <th class="status">Poor</th>
+                      <th>Note</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -515,50 +556,79 @@
                         <input
                           type="radio"
                           name="water_consumption"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="water_consumption"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="water_consumption"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="water_consumption_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
                     <tr>
                       <td>Water pH Level (Within acceptable range)</td>
                       <td class="status">
-                        <input type="radio" name="water_ph" value="ok" />
+                        <input type="radio" name="water_ph" value="excellent" />
                       </td>
                       <td class="status">
-                        <input type="radio" name="water_ph" value="not_ok" />
+                        <input type="radio" name="water_ph" value="good" />
                       </td>
                       <td class="status">
-                        <input type="radio" name="water_ph" value="na" />
+                        <input type="radio" name="water_ph" value="poor" />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="water_ph_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                     <tr>
                       <td>Chlorine Level (Effective sanitation)</td>
                       <td class="status">
-                        <input type="radio" name="chlorine_level" value="ok" />
+                        <input
+                          type="radio"
+                          name="chlorine_level"
+                          value="excellent"
+                        />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="chlorine_level"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
-                        <input type="radio" name="chlorine_level" value="na" />
+                        <input
+                          type="radio"
+                          name="chlorine_level"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="chlorine_level_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                     <tr>
@@ -567,38 +637,60 @@
                         <input
                           type="radio"
                           name="water_line_height"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="water_line_height"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="water_line_height"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="water_line_height_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
                     <tr>
                       <td>Water Flow Rate (Nipples/Drinkers operational)</td>
                       <td class="status">
-                        <input type="radio" name="water_flow_rate" value="ok" />
+                        <input
+                          type="radio"
+                          name="water_flow_rate"
+                          value="excellent"
+                        />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="water_flow_rate"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
-                        <input type="radio" name="water_flow_rate" value="na" />
+                        <input
+                          type="radio"
+                          name="water_flow_rate"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="water_flow_rate_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                   </tbody>
@@ -606,7 +698,6 @@
               </div>
             </div>
 
-            <!-- Ventilation -->
             <div class="section">
               <div class="section-title">
                 Ventilation & Environmental Control
@@ -616,9 +707,10 @@
                   <thead>
                     <tr>
                       <th>Inspection Item</th>
-                      <th class="status">OK</th>
-                      <th class="status">Not OK</th>
-                      <th class="status">NA</th>
+                      <th class="status">Excellent</th>
+                      <th class="status">Good</th>
+                      <th class="status">Poor</th>
+                      <th>Note</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -628,21 +720,28 @@
                         <input
                           type="radio"
                           name="temperature_variation"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="temperature_variation"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="temperature_variation"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="temperature_variation_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
@@ -652,38 +751,52 @@
                         <input
                           type="radio"
                           name="sensor_calibration"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="sensor_calibration"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="sensor_calibration"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="sensor_calibration_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
                     <tr>
                       <td>Ammonia Level (Visual/Sensor check)</td>
                       <td class="status">
-                        <input type="radio" name="ammonia_level" value="ok" />
-                      </td>
-                      <td class="status">
                         <input
                           type="radio"
                           name="ammonia_level"
-                          value="not_ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
-                        <input type="radio" name="ammonia_level" value="na" />
+                        <input type="radio" name="ammonia_level" value="good" />
+                      </td>
+                      <td class="status">
+                        <input type="radio" name="ammonia_level" value="poor" />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="ammonia_level_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                   </tbody>
@@ -691,7 +804,6 @@
               </div>
             </div>
 
-            <!-- Litter -->
             <div class="section">
               <div class="section-title">
                 Litter Management & Floor Conditions
@@ -701,9 +813,10 @@
                   <thead>
                     <tr>
                       <th>Inspection Item</th>
-                      <th class="status">OK</th>
-                      <th class="status">Not OK</th>
-                      <th class="status">NA</th>
+                      <th class="status">Excellent</th>
+                      <th class="status">Good</th>
+                      <th class="status">Poor</th>
+                      <th>Note</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -713,46 +826,75 @@
                         <input
                           type="radio"
                           name="litter_condition"
-                          value="ok"
+                          value="excellent"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="litter_condition"
-                          value="not_ok"
+                          value="good"
                         />
                       </td>
                       <td class="status">
                         <input
                           type="radio"
                           name="litter_condition"
-                          value="na"
+                          value="poor"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="litter_condition_note"
+                          placeholder="Note"
                         />
                       </td>
                     </tr>
                     <tr>
                       <td>Raking Done (Even distribution)</td>
                       <td class="status">
-                        <input type="radio" name="raking_done" value="ok" />
+                        <input
+                          type="radio"
+                          name="raking_done"
+                          value="excellent"
+                        />
                       </td>
                       <td class="status">
-                        <input type="radio" name="raking_done" value="not_ok" />
+                        <input type="radio" name="raking_done" value="good" />
                       </td>
                       <td class="status">
-                        <input type="radio" name="raking_done" value="na" />
+                        <input type="radio" name="raking_done" value="poor" />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="raking_done_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                     <tr>
                       <td>Identification of Wet Areas (Corrective action)</td>
                       <td class="status">
-                        <input type="radio" name="wet_areas" value="ok" />
+                        <input
+                          type="radio"
+                          name="wet_areas"
+                          value="excellent"
+                        />
                       </td>
                       <td class="status">
-                        <input type="radio" name="wet_areas" value="not_ok" />
+                        <input type="radio" name="wet_areas" value="good" />
                       </td>
                       <td class="status">
-                        <input type="radio" name="wet_areas" value="na" />
+                        <input type="radio" name="wet_areas" value="poor" />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="wet_areas_note"
+                          placeholder="Note"
+                        />
                       </td>
                     </tr>
                   </tbody>
@@ -760,24 +902,22 @@
               </div>
             </div>
 
-            <!-- Notes -->
             <div class="section">
               <div class="section-title">General Notes & Observations</div>
               <div class="section-desc">
-                Include details on any "Not OK" items, required repairs, or
-                specific bird behavior observations.
+                Include details on weak points, required repairs, or specific
+                bird behavior observations.
               </div>
               <div class="section-body">
                 <div class="field">
                   <textarea
-                    name="notes"
+                    name="general_notes"
                     placeholder="Write detailed observations here..."
                   ></textarea>
                 </div>
               </div>
             </div>
 
-            <!-- Overall Grading -->
             <div class="section">
               <div class="section-title">Overall Inspection Grading</div>
               <div class="section-body">
@@ -788,24 +928,20 @@
                       name="overall_grade"
                       value="excellent"
                     />
-                    <span class="dot green"></span>
                     Excellent
                   </label>
                   <label class="grade-option">
                     <input type="radio" name="overall_grade" value="good" />
-                    <span class="dot orange"></span>
                     Good
                   </label>
                   <label class="grade-option">
                     <input type="radio" name="overall_grade" value="poor" />
-                    <span class="dot red"></span>
                     Poor
                   </label>
                 </div>
               </div>
             </div>
 
-            <!-- Signatures -->
             <div class="section">
               <div class="section-title">Signatures</div>
               <div class="section-body">
