@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Farm Visit Report Form</title>
+    <style>
+      :root {
+        --brand: #6f2cff;
+        --brand-dark: #511cc0;
+        --ok: #198754;
+        --warn: #f0ad4e;
+        --bad: #dc3545;
+        --line: #d9d9e3;
+        --soft: #f7f7fb;
+        --text: #222;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #eef1f7;
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .form-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e9e9f3;
+      }
+      .header {
+        background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+        color: white;
+        padding: 18px 22px;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+      .header img {
+        width: 120px;
+        height: auto;
+        background: white;
+        border-radius: 10px;
+        padding: 8px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.1;
+      }
+      .header p {
+        margin: 4px 0 0;
+        opacity: 0.95;
+      }
+      .body {
+        padding: 22px;
+      }
+      .section {
+        margin-bottom: 22px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .section-title {
+        margin: 0;
+        background: var(--soft);
+        padding: 12px 16px;
+        font-size: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .section-body {
+        padding: 14px 16px 18px;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px 18px;
+      }
+      .field label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      input[type="text"],
+      input[type="date"],
+      input[type="number"],
+      textarea,
+      select {
+        width: 100%;
+        border: 1px solid #cfd3df;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 14px;
+        background: white;
+      }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .item {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      .item:last-child {
+        margin-bottom: 0;
+      }
+      .item-name {
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .choices {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .choices label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 400;
+      }
+      .grading {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: white;
+        font-weight: 700;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .ok {
+        background: var(--ok);
+      }
+      .warn {
+        background: var(--warn);
+      }
+      .bad {
+        background: var(--bad);
+      }
+      .footer {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding-top: 8px;
+      }
+      button {
+        border: none;
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .primary {
+        background: var(--brand);
+        color: white;
+      }
+      .secondary {
+        background: #eef0f6;
+        color: #333;
+      }
+      .note {
+        font-size: 13px;
+        color: #555;
+        margin-top: 10px;
+      }
+      .signature-box {
+        height: 80px;
+        border: 1px dashed #b9bfd0;
+        border-radius: 10px;
+        background: #fcfcfe;
+      }
+      @media print {
+        body {
+          background: white;
+        }
+        .wrap {
+          max-width: none;
+          margin: 0;
+          padding: 0;
+        }
+        .form-card {
+          box-shadow: none;
+          border: none;
+          border-radius: 0;
+        }
+        .footer,
+        .note {
+          display: none;
+        }
+        .section {
+          break-inside: avoid;
+        }
+      }
+      @media (max-width: 720px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="form-card">
+        <div class="header">
+          <img src="your-logo.png" alt="Company logo" />
+          <div>
+            <h1>Farm Visit Report</h1>
+            <p>Online-style inspection form for broiler farm visits</p>
+          </div>
+        </div>
+
+        <div class="body">
+          <form>
+            <div class="section">
+              <h2 class="section-title">General Information</h2>
+              <div class="section-body grid-2">
+                <div class="field">
+                  <label>Farm Name</label><input type="text" name="farm_name" />
+                </div>
+                <div class="field">
+                  <label>Location</label><input type="text" name="location" />
+                </div>
+                <div class="field">
+                  <label>Date</label><input type="date" name="date" />
+                </div>
+                <div class="field">
+                  <label>Group</label><input type="text" name="group" />
+                </div>
+                <div class="field">
+                  <label>Area Manager</label
+                  ><input type="text" name="area_manager" />
+                </div>
+                <div class="field">
+                  <label>Supervisor</label
+                  ><input type="text" name="supervisor" />
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2 class="section-title">Feed Management</h2>
+              <div class="section-body">
+                <div class="item">
+                  <div class="item-name">Feed line height</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="feed_line_height" value="ok" />
+                      ✔ OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="feed_line_height"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="feed_line_height" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Feed amount in feeders</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="feed_in_feeders" value="ok" />
+                      ✔ OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="feed_in_feeders"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="feed_in_feeders" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Feed amount in red plates</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="feed_red_plates" value="ok" />
+                      ✔ OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="feed_red_plates"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="feed_red_plates" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2 class="section-title">Water Management</h2>
+              <div class="section-body">
+                <div class="item">
+                  <div class="item-name">Water Consumption (L)</div>
+                  <div class="choices">
+                    <label
+                      ><input
+                        type="radio"
+                        name="water_consumption"
+                        value="ok"
+                      />
+                      ✔ OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="water_consumption"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="water_consumption"
+                        value="na"
+                      />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Water pH</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="water_ph" value="ok" /> ✔
+                      OK</label
+                    >
+                    <label
+                      ><input type="radio" name="water_ph" value="not_ok" /> ✖
+                      Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="water_ph" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Chlorine Level</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="chlorine_level" value="ok" /> ✔
+                      OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="chlorine_level"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="chlorine_level" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Water Line Height</div>
+                  <div class="choices">
+                    <label
+                      ><input
+                        type="radio"
+                        name="water_line_height"
+                        value="ok"
+                      />
+                      ✔ OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="water_line_height"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="water_line_height"
+                        value="na"
+                      />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Water flow</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="water_flow" value="ok" /> ✔
+                      OK</label
+                    >
+                    <label
+                      ><input type="radio" name="water_flow" value="not_ok" /> ✖
+                      Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="water_flow" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2 class="section-title">Ventilation &amp; Environment</h2>
+              <div class="section-body">
+                <div class="item">
+                  <div class="item-name">Temperature (°C) variation</div>
+                  <div class="choices">
+                    <label
+                      ><input
+                        type="radio"
+                        name="temperature_variation"
+                        value="ok"
+                      />
+                      ✔ OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="temperature_variation"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="temperature_variation"
+                        value="na"
+                      />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Ammonia Level</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="ammonia_level" value="ok" /> ✔
+                      OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="ammonia_level"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="ammonia_level" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2 class="section-title">Litter Management</h2>
+              <div class="section-body">
+                <div class="item">
+                  <div class="item-name">Litter Condition</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="litter_condition" value="ok" />
+                      ✔ OK</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        name="litter_condition"
+                        value="not_ok"
+                      />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="litter_condition" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Raking Done</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="raking_done" value="ok" /> ✔
+                      OK</label
+                    >
+                    <label
+                      ><input type="radio" name="raking_done" value="not_ok" />
+                      ✖ Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="raking_done" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="item-name">Wet Areas</div>
+                  <div class="choices">
+                    <label
+                      ><input type="radio" name="wet_areas" value="ok" /> ✔
+                      OK</label
+                    >
+                    <label
+                      ><input type="radio" name="wet_areas" value="not_ok" /> ✖
+                      Not OK</label
+                    >
+                    <label
+                      ><input type="radio" name="wet_areas" value="na" />
+                      N/A</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2 class="section-title">Inspection Grading</h2>
+              <div class="section-body">
+                <div class="grading">
+                  <label class="pill"
+                    ><input
+                      type="radio"
+                      name="inspection_grade"
+                      value="excellent"
+                    />
+                    <span class="dot ok"></span> Excellent</label
+                  >
+                  <label class="pill"
+                    ><input type="radio" name="inspection_grade" value="good" />
+                    <span class="dot warn"></span> Good</label
+                  >
+                  <label class="pill"
+                    ><input type="radio" name="inspection_grade" value="poor" />
+                    <span class="dot bad"></span> Poor</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2 class="section-title">General Notes</h2>
+              <div class="section-body">
+                <textarea
+                  name="notes"
+                  placeholder="Write notes here..."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2 class="section-title">Supervisor Sign-off</h2>
+              <div class="section-body grid-2">
+                <div class="field">
+                  <label>Farm Supervisor Name</label
+                  ><input type="text" name="sign_name" />
+                </div>
+                <div class="field">
+                  <label>Sign Date</label><input type="date" name="sign_date" />
+                </div>
+                <div class="field" style="grid-column: 1 / -1">
+                  <label>Signature</label>
+                  <div class="signature-box"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer">
+              <button type="button" class="primary" onclick="window.print()">
+                Print / Save PDF
+              </button>
+              <button type="reset" class="secondary">Clear Form</button>
+            </div>
+
+            <div class="note">
+              Replace <b>your-logo.png</b> with your actual logo file path.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
